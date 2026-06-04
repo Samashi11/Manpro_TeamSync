@@ -1,0 +1,682 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#25005a",
+              "on-surface-variant": "#ccc3d8",
+              "secondary-fixed": "#eaddff",
+              "tertiary-fixed-dim": "#c0c6da",
+              background: "#0f131c",
+              "primary-fixed-dim": "#cebdff",
+              "surface-container-lowest": "#0a0e17",
+              secondary: "#d2bbff",
+              tertiary: "#c0c6da",
+              "surface-variant": "#31353f",
+              "inverse-primary": "#674bb5",
+              primary: "#cebdff",
+              "surface-container-low": "#181b25",
+              error: "#ffb4ab",
+              "error-container": "#93000a",
+              "surface-bright": "#353943",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#2c303a",
+              "primary-fixed": "#e8ddff",
+              "inverse-surface": "#dfe2ef",
+              "secondary-fixed-dim": "#d2bbff",
+              surface: "#0f131c",
+              "outline-variant": "#4a4455",
+              "on-tertiary-fixed-variant": "#404757",
+              "on-secondary-container": "#c9aeff",
+              "surface-tint": "#cebdff",
+              "on-primary": "#381385",
+              "surface-container-high": "#262a34",
+              "on-tertiary-container": "#e0e6fa",
+              "on-primary-fixed": "#21005e",
+              "surface-dim": "#0f131c",
+              "on-primary-fixed-variant": "#4f319c",
+              "surface-container": "#1c1f29",
+              "tertiary-fixed": "#dce2f6",
+              "on-background": "#dfe2ef",
+              "on-secondary": "#3f008e",
+              "on-tertiary": "#2a303f",
+              "on-secondary-fixed-variant": "#5a00c6",
+              "surface-container-highest": "#31353f",
+              "on-error": "#690005",
+              "on-tertiary-fixed": "#151c2a",
+              "primary-container": "#6f54be",
+              "secondary-container": "#6001d1",
+              outline: "#958da1",
+              "on-surface": "#dfe2ef",
+              "on-primary-container": "#ebe1ff",
+              "tertiary-container": "#606778",
+            },
+            fontFamily: {
+              headline: ["Space Grotesk"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0a0e17;
+      }
+      .nebula-glow {
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.4),
+          0 0 15px rgba(124, 58, 237, 0.05);
+      }
+      .glass-card {
+        background: rgba(49, 53, 63, 0.4);
+        backdrop-filter: blur(20px);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #4a4455;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="font-body text-on-surface overflow-hidden">
+    <!-- SideNavBar -->
+    <aside
+      class="fixed left-0 top-0 h-full z-40 flex flex-col p-6 bg-[#181b25]/60 backdrop-blur-xl h-screen w-64 border-r border-[#4a4455]/15 font-['Space_Grotesk'] text-sm tracking-wide shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+    >
+      <div class="mb-10 flex flex-col gap-1">
+        <span
+          class="text-2xl font-bold bg-gradient-to-br from-[#cebdff] to-[#6f54be] bg-clip-text text-transparent"
+          >TeamSync</span
+        >
+        <span
+          class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60"
+          >The Celestial Workspace</span
+        >
+      </div>
+      <nav class="flex flex-col gap-2 flex-grow">
+        <!-- Active Tab: Dashboard -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-[#cebdff] bg-[#31353f]/40 rounded-lg shadow-[0_0_15px_rgba(124,58,237,0.1)] transition-all duration-300"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >dashboard</span
+          >
+          <span>Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
+          href="#"
+        >
+          <span class="material-symbols-outlined">folder_shared</span>
+          <span>Projects</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
+          href="#"
+        >
+          <span class="material-symbols-outlined">assignment</span>
+          <span>Tasks</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
+          href="#"
+        >
+          <span class="material-symbols-outlined">history</span>
+          <span>Activity Log</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
+          href="#"
+        >
+          <span class="material-symbols-outlined">stars</span>
+          <span>Contribution</span>
+        </a>
+      </nav>
+      <button
+        class="mt-auto flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-semibold shadow-lg hover:opacity-90 transition-opacity"
+      >
+        <span class="material-symbols-outlined">add</span>
+        <span>New Project</span>
+      </button>
+    </aside>
+    <!-- TopAppBar -->
+    <header
+      class="fixed top-0 right-0 left-64 h-20 flex justify-between items-center px-8 z-30 bg-[#0a0e17]/40 backdrop-blur-md font-['Space_Grotesk'] font-medium"
+    >
+      <div class="flex items-center flex-1 max-w-xl">
+        <div class="relative w-full group">
+          <span
+            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors"
+            >search</span
+          >
+          <input
+            class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-secondary focus:ring-0 rounded-lg pl-12 pr-4 py-2.5 text-sm transition-all"
+            placeholder="Search orbit..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <button
+          class="relative text-on-surface-variant hover:text-white transition-colors"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+          <span
+            class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"
+          ></span>
+        </button>
+        <button
+          class="text-on-surface-variant hover:text-white transition-colors"
+        >
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <div
+          class="flex items-center gap-3 pl-4 border-l border-outline-variant/20"
+        >
+          <div class="text-right hidden sm:block">
+            <p class="text-sm font-bold text-on-surface">Alex Mercer</p>
+            <p class="text-[10px] text-on-surface-variant">Lead Navigator</p>
+          </div>
+          <img
+            alt="User Profile"
+            class="w-10 h-10 rounded-full object-cover border-2 border-primary/20"
+            data-alt="Close-up portrait of a young man with a neutral expression and soft lighting, professional aesthetic"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl88iCjBo7fSP9EdfW2EsGSzfZla_b_35yp82SYvsIp_Dsu-MuGxsWLEDGh-T_fT9RA7PHCGm_Bxj3xuwGb5HYOlzkXddGO0op2XJRjrrB0gf3vK8x8_6rlZ7tVqAKP78FtsErXQkp6tRCOSDVNGON04lxqlDFkM8mVGooW4xivDUw9B4REe3fchvYLF0Cy5utU4x1OB6tNJTUjIpilx5uIg_8K9E24FS4lJtOBBIquGlQZbkdV265rnURzOIRsHE-sldJvWTuHZw"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="fixed inset-0 left-64 top-20 overflow-y-auto custom-scrollbar bg-surface-container-lowest p-8"
+    >
+      <div class="max-w-7xl mx-auto space-y-8 pb-12">
+        <!-- Welcome Header -->
+        <div class="flex justify-between items-end">
+          <div>
+            <h1
+              class="font-headline text-3xl font-bold tracking-tight text-on-surface"
+            >
+              System Overview
+            </h1>
+            <p class="text-on-surface-variant mt-1">
+              Status: All systems operational within the Nebula.
+            </p>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-label text-on-surface-variant">
+              Current Rotation
+            </p>
+            <p class="text-xl font-headline font-medium text-primary">
+              May 24, 2024
+            </p>
+          </div>
+        </div>
+        <!-- Overview Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div
+            class="bg-surface-container-low p-6 rounded-2xl nebula-glow relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+            >
+              <span class="material-symbols-outlined text-6xl"
+                >inventory_2</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2"
+            >
+              Total Tasks
+            </p>
+            <h3 class="text-4xl font-headline font-bold text-on-surface">12</h3>
+            <div
+              class="mt-4 flex items-center gap-2 text-[10px] text-secondary"
+            >
+              <span class="material-symbols-outlined text-sm">trending_up</span>
+              <span>+2 from yesterday</span>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="bg-surface-container-low p-6 rounded-2xl nebula-glow relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+            >
+              <span class="material-symbols-outlined text-6xl text-primary"
+                >check_circle</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2"
+            >
+              Completed
+            </p>
+            <h3 class="text-4xl font-headline font-bold text-on-surface">8</h3>
+            <div
+              class="mt-4 flex items-center gap-2 text-[10px] text-on-surface-variant"
+            >
+              <div
+                class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden"
+              >
+                <div class="bg-primary h-full w-[66%]"></div>
+              </div>
+              <span>66%</span>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="bg-surface-container-low p-6 rounded-2xl nebula-glow relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+            >
+              <span class="material-symbols-outlined text-6xl text-error"
+                >pending</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2"
+            >
+              Pending
+            </p>
+            <h3 class="text-4xl font-headline font-bold text-on-surface">4</h3>
+            <div class="mt-4 flex items-center gap-2 text-[10px] text-error">
+              <span class="material-symbols-outlined text-sm"
+                >priority_high</span
+              >
+              <span>2 urgent markers</span>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div
+            class="bg-surface-container-low p-6 rounded-2xl nebula-glow relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+            >
+              <span class="material-symbols-outlined text-6xl text-secondary"
+                >groups</span
+              >
+            </div>
+            <p
+              class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2"
+            >
+              Team Activity
+            </p>
+            <h3 class="text-4xl font-headline font-bold text-secondary">92%</h3>
+            <div
+              class="mt-4 flex items-center gap-2 text-[10px] text-secondary"
+            >
+              <span class="material-symbols-outlined text-sm">bolt</span>
+              <span>Peak performance</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Task Progress Section (Large) -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="flex items-center justify-between">
+              <h2 class="font-headline text-xl font-semibold text-on-surface">
+                Project Trajectories
+              </h2>
+              <button class="text-xs font-label text-primary hover:underline">
+                View All Projects
+              </button>
+            </div>
+            <div class="space-y-4">
+              <!-- Progress Item 1 -->
+              <div
+                class="glass-card p-6 rounded-2xl border border-outline-variant/10 hover:bg-[#31353f]/50 transition-all cursor-pointer"
+              >
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary"
+                    >
+                      <span class="material-symbols-outlined"
+                        >rocket_launch</span
+                      >
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-on-surface">
+                        Project Nebula-X
+                      </h4>
+                      <p class="text-xs text-on-surface-variant">
+                        System integration phase
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-sm font-headline text-primary font-bold"
+                    >75%</span
+                  >
+                </div>
+                <div
+                  class="w-full h-2 bg-surface-container-lowest rounded-full overflow-hidden"
+                >
+                  <div
+                    class="h-full bg-gradient-to-r from-primary to-primary-container w-3/4 shadow-[0_0_10px_rgba(206,189,255,0.4)]"
+                  ></div>
+                </div>
+                <div class="mt-4 flex items-center gap-4">
+                  <div class="flex -space-x-2">
+                    <img
+                      class="w-6 h-6 rounded-full border border-background"
+                      data-alt="Portrait of a smiling woman with glasses and professional attire"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB8Ju69oxH_pZZBmKRtgDc5qo5u9RRZDb4M8VimiW8ltdwvda6w133YYlvOGOxfjoh0ygLFCH7yVIszB_w7dYdXW8FUqB_u-K6mCfKN1FtYzRq0SDEc6j8SWuWq_ZyRFjial7Mnauo4MxZkpu_Y2RrqJFDf_c9bDds21oAv34gBaEMqwEKJvVovsalKWxUKsB9Xtdd7c_kdaceWZ_2RqKFESIggqYaJ7ny1MaoQaVRBDIk58IjV6ct2nHh12Hf9sDepFvkFDxJzos"
+                    />
+                    <img
+                      class="w-6 h-6 rounded-full border border-background"
+                      data-alt="Portrait of a young man with a slight beard in soft natural light"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtwos4YvG_xND8dQXWkxGCQm9FWExZhb28ucLU20Lwxm3TtXeo0i164W36Fd6IPK8u_3eNwVWX8RtFWZFEqMulqUXh0SOQ-q4cHnVSb04QFoVwlzP558AJmLfH-0wwnUZT98QyJ2n6HAUuMtYvncOrxGaafmGDMv8gbAhQ-PB48nhXoGWJ9K0DlEUMJdPPL6I3zo50WKHTZVbzaIPdtg9Ie3Rh__LgYweVfHr2rFYKbnojCLGKQk0P3gwleNg6Mrvwtvs5qYiV1fA"
+                    />
+                    <div
+                      class="w-6 h-6 rounded-full bg-surface-container-high border border-background flex items-center justify-center text-[8px] text-on-surface-variant"
+                    >
+                      +2
+                    </div>
+                  </div>
+                  <span
+                    class="text-[10px] text-on-surface-variant ml-auto flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-xs"
+                      >calendar_today</span
+                    >
+                    Due in 3 days
+                  </span>
+                </div>
+              </div>
+              <!-- Progress Item 2 -->
+              <div
+                class="glass-card p-6 rounded-2xl border border-outline-variant/10 hover:bg-[#31353f]/50 transition-all cursor-pointer"
+              >
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary"
+                    >
+                      <span class="material-symbols-outlined"
+                        >auto_awesome</span
+                      >
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-on-surface">
+                        Celestial UI Redesign
+                      </h4>
+                      <p class="text-xs text-on-surface-variant">
+                        Design system audit
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-sm font-headline text-secondary font-bold"
+                    >42%</span
+                  >
+                </div>
+                <div
+                  class="w-full h-2 bg-surface-container-lowest rounded-full overflow-hidden"
+                >
+                  <div
+                    class="h-full bg-gradient-to-r from-secondary to-secondary-container w-[42%] shadow-[0_0_10px_rgba(210,187,255,0.4)]"
+                  ></div>
+                </div>
+                <div class="mt-4 flex items-center gap-4">
+                  <div class="flex -space-x-2">
+                    <img
+                      class="w-6 h-6 rounded-full border border-background"
+                      data-alt="Confident woman professional with a friendly smile"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjY4aMjfduT7ivT0x9qmAbZA-BJFpm9xk9hmHZZXb2oDhAzWUAhSH2wwuAx7mIKdg6ylAc9LpkybIAOF6JcKyzJxfssdLvdauUF_CBEiAWFhQ6aWJ9dfduGw-znE2JIvbeST8WMVTT_ZfqYgekhJHZYRu9-GuIskq4mw37Wd1Bpod553_xLAXDbOpCikAPw4rvN3WdVvWeBR7kMjkF2GlrYcQLawgQ_GQxHYx8AIvmzk65mDu5Hy6bNiIqmuTj7o1pqCRYHDJBbtY"
+                    />
+                    <div
+                      class="w-6 h-6 rounded-full bg-surface-container-high border border-background flex items-center justify-center text-[8px] text-on-surface-variant"
+                    >
+                      JS
+                    </div>
+                  </div>
+                  <span
+                    class="text-[10px] text-on-surface-variant ml-auto flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-xs"
+                      >calendar_today</span
+                    >
+                    Due in 12 days
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right Sidebar Sections -->
+          <div class="space-y-8">
+            <!-- Top Contributors -->
+            <section>
+              <h2
+                class="font-headline text-xl font-semibold text-on-surface mb-6"
+              >
+                Top Contributors
+              </h2>
+              <div
+                class="bg-surface-container-low rounded-2xl p-6 space-y-6 nebula-glow"
+              >
+                <!-- Contributor 1 -->
+                <div class="flex items-center gap-4">
+                  <span class="text-lg font-headline font-bold text-primary w-4"
+                    >1</span
+                  >
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-primary/40 object-cover"
+                    data-alt="Portrait of a young woman with a focused look, high contrast lighting"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAje8HN7G5y_mY9dLKNOBJ7qwMUwijE1azrTYzLo2sJWLUSlXM9GXM2JcR4B-RhMWD4TX2yRqE1_NuYvxAlWhA5RbPv8Bg7fIVY2KhyeFv8LEYk8nE0NmOxcP83wf3-lGqpo3WHp3b4e8nD9UNAiTgNGjI9PDz7WBqCWdDueX9jSN2zbFhKExVU24ESMC3oS7d0S4C7A0LmD9Bi44_-_g96__s6brkLucwVZAjsyYeyPB8KaglzDdPFcVbNYwsEsGgnOaL4TIxzyHg"
+                  />
+                  <div class="flex-grow">
+                    <p class="text-sm font-medium text-on-surface leading-none">
+                      Sarah Chen
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant mt-1">
+                      Lead Architect
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-primary">2,480</p>
+                    <p class="text-[8px] text-on-surface-variant">XP</p>
+                  </div>
+                </div>
+                <!-- Contributor 2 -->
+                <div class="flex items-center gap-4">
+                  <span
+                    class="text-lg font-headline font-bold text-secondary w-4"
+                    >2</span
+                  >
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-secondary/40 object-cover"
+                    data-alt="Portrait of a smiling young man in a denim shirt, natural outdoor lighting"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ-e071QJy8SW2oQGdJjdNoBBAPl98nyhTjZgrbf2QVSxGfSnGYqB79greHxHnbOlt_A54e4zJvn4DTX_PoXOw1KOHNatp7RmeT9rpP4BlVi4Q-ugdewhb97gSfwl3qIkcv5SY8RHDhHkQgXoNFVQ0lQSKo1XDRgF17fMo1M1mr0yqtPxfTEjDz-DE5etcRUKhgl0z82SHyIxsH1CGGLSSZL8oT5Elmi_MXfb79CxjI1SPRHMv5TzyNH04MtunUgvqIIuLK-M5TPA"
+                  />
+                  <div class="flex-grow">
+                    <p class="text-sm font-medium text-on-surface leading-none">
+                      Marcus Vo
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant mt-1">
+                      UI Navigator
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-secondary">2,150</p>
+                    <p class="text-[8px] text-on-surface-variant">XP</p>
+                  </div>
+                </div>
+                <!-- Contributor 3 -->
+                <div class="flex items-center gap-4">
+                  <span
+                    class="text-lg font-headline font-bold text-on-surface-variant w-4"
+                    >3</span
+                  >
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-outline-variant/40 object-cover"
+                    data-alt="Portrait of a woman with a serene expression, soft blurred background"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxXijoG-lphQXMo0sjYQtM0Vu-mxfEr-pkxSJ1jlOuUKj8Gp7OYsj4SYbWVH8bUaHLTVaOP7E32DAPs49jlQEMJaFJLi8ZWxhmAw2OEL_mBcZPxEkIOqSA0JTWhYEg-XnONkkq-hi2uDHO8byyE0ahIDOUKJpTKZ72lanV2PL9Z0JRRpXBAw03hJfjg9xcBmjZfyV31D5eGQChY-QHx2JnCaiaRBF_NfXMJb-ouSf0cEXASpu9gpPK0qe_cUqT4RBMlEzMiWpw_0Q"
+                  />
+                  <div class="flex-grow">
+                    <p class="text-sm font-medium text-on-surface leading-none">
+                      Lena Hart
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant mt-1">
+                      Dev Ops
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-on-surface">1,920</p>
+                    <p class="text-[8px] text-on-surface-variant">XP</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Activity Log Preview -->
+            <section>
+              <h2
+                class="font-headline text-xl font-semibold text-on-surface mb-6"
+              >
+                Activity Log
+              </h2>
+              <div class="space-y-4">
+                <div class="flex gap-4 relative">
+                  <div
+                    class="absolute left-4 top-10 bottom-0 w-px bg-outline-variant/20"
+                  ></div>
+                  <div
+                    class="flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center z-10"
+                  >
+                    <span class="material-symbols-outlined text-sm text-primary"
+                      >edit</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm text-on-surface">
+                      <span class="font-semibold">Alex</span> updated
+                      <span class="text-primary">Project X</span>
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant">
+                      12 minutes ago
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-4 relative">
+                  <div
+                    class="absolute left-4 top-10 bottom-0 w-px bg-outline-variant/20"
+                  ></div>
+                  <div
+                    class="flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center z-10"
+                  >
+                    <span
+                      class="material-symbols-outlined text-sm text-secondary"
+                      >add_task</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm text-on-surface">
+                      <span class="font-semibold">Sarah</span> completed
+                      <span class="text-secondary">API Docs</span>
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant">
+                      2 hours ago
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-4 relative">
+                  <div
+                    class="flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center z-10"
+                  >
+                    <span
+                      class="material-symbols-outlined text-sm text-tertiary"
+                      >group_add</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm text-on-surface">
+                      <span class="font-semibold">Lena</span> joined
+                      <span class="text-tertiary">Design Team</span>
+                    </p>
+                    <p class="text-[10px] text-on-surface-variant">
+                      Yesterday at 16:40
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Contextual Floating Action Component (Hidden by default unless on mobile or specific focus) -->
+    <div class="fixed bottom-8 right-8 z-50 group">
+      <div
+        class="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity"
+      ></div>
+      <button
+        class="relative bg-gradient-to-br from-primary to-primary-container p-4 rounded-full shadow-2xl flex items-center justify-center text-on-primary"
+      >
+        <span class="material-symbols-outlined text-3xl">add</span>
+      </button>
+    </div>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAn1kK9yI3xdvS3_aOpCW1KDtQW2e7UBJU",
+        authDomain: "teamsync-5e4c2.firebaseapp.com",
+        projectId: "teamsync-5e4c2",
+        storageBucket: "teamsync-5e4c2.firebasestorage.app",
+        messagingSenderId: "242657589018",
+        appId: "1:242657589018:web:850c959416531a4db35ea3",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      export const db = getFirestore(app);
+      // export const db = getFirestore(app, "default");
+    </script>
+  </body>
+</html>
