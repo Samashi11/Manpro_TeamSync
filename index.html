@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TeamSync</title>
+  </head>
+  <body>
+    <script type="module">
+      import { listenAuth } from "./js/auth.js";
+
+      listenAuth((data) => {
+        if (data) {
+          // sudah login → langsung ke dashboard
+          window.location.href = "/pages/dashboard.html";
+        } else {
+          // belum login → ke login
+          window.location.href = "/pages/auth/login.html";
+        }
+      });
+    </script>
+  </body>
+</html>
