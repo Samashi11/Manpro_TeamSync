@@ -132,7 +132,7 @@
         <!-- Active Tab: Dashboard -->
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#cebdff] bg-[#31353f]/40 rounded-lg shadow-[0_0_15px_rgba(124,58,237,0.1)] transition-all duration-300"
-          href="#"
+          href="dashboard.html"
         >
           <span
             class="material-symbols-outlined"
@@ -143,28 +143,28 @@
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="projects.html"
         >
           <span class="material-symbols-outlined">folder_shared</span>
           <span>Projects</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="tasks.html"
         >
           <span class="material-symbols-outlined">assignment</span>
           <span>Tasks</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="logs.html"
         >
           <span class="material-symbols-outlined">history</span>
           <span>Activity Log</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="contribution.html"
         >
           <span class="material-symbols-outlined">stars</span>
           <span>Contribution</span>
@@ -212,8 +212,10 @@
           class="flex items-center gap-3 pl-4 border-l border-outline-variant/20"
         >
           <div class="text-right hidden sm:block">
-            <p class="text-sm font-bold text-on-surface">Alex Mercer</p>
-            <p class="text-[10px] text-on-surface-variant">Lead Navigator</p>
+            <p id="userName" class="text-sm font-bold text-on-surface">
+              Loading...
+            </p>
+            <p id="userRole" class="text-[10px] text-on-surface-variant">...</p>
           </div>
           <img
             alt="User Profile"
@@ -221,6 +223,12 @@
             data-alt="Close-up portrait of a young man with a neutral expression and soft lighting, professional aesthetic"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl88iCjBo7fSP9EdfW2EsGSzfZla_b_35yp82SYvsIp_Dsu-MuGxsWLEDGh-T_fT9RA7PHCGm_Bxj3xuwGb5HYOlzkXddGO0op2XJRjrrB0gf3vK8x8_6rlZ7tVqAKP78FtsErXQkp6tRCOSDVNGON04lxqlDFkM8mVGooW4xivDUw9B4REe3fchvYLF0Cy5utU4x1OB6tNJTUjIpilx5uIg_8K9E24FS4lJtOBBIquGlQZbkdV265rnURzOIRsHE-sldJvWTuHZw"
           />
+          <button
+            id="logoutBtn"
+            class="ml-3 px-3 py-1 text-xs bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </header>
@@ -660,6 +668,7 @@
       // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
       import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+      import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
       // TODO: Add SDKs for Firebase products that you want to use
       // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -676,7 +685,40 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       export const db = getFirestore(app);
+      export const auth = getAuth(app);
       // export const db = getFirestore(app, "default");
+
+      import { listenAuth } from "../js/auth.js";
+      // import { auth } from "../js/firebase.js";
+      import { signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+      listenAuth((data) => {
+        if (!data) {
+          window.location.href = "/pages/auth/login.html";
+          return;
+        }
+
+        console.log("Masuk sebagai:", data.userData.nama);
+        // 🔥 ambil dari Firestore
+        const nama = data.userData.nama;
+        const role = data.userData.role;
+
+        document.getElementById("userName").textContent = nama;
+        document.getElementById("userRole").textContent = role;
+
+        document
+          .getElementById("logoutBtn")
+          .addEventListener("click", async () => {
+            try {
+              await signOut(auth);
+
+              window.location.href = "/pages/auth/login.html";
+            } catch (err) {
+              console.error(err);
+              alert("Logout gagal");
+            }
+          });
+      });
     </script>
   </body>
 </html>

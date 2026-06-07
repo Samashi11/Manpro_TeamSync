@@ -132,35 +132,35 @@
       <nav class="flex flex-col gap-2 flex-grow">
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="dashboard.html"
         >
           <span class="material-symbols-outlined">dashboard</span>
           <span>Dashboard</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="projects.html"
         >
           <span class="material-symbols-outlined">folder_shared</span>
           <span>Projects</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="tasks.html"
         >
           <span class="material-symbols-outlined">assignment</span>
           <span>Tasks</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="logs.html"
         >
           <span class="material-symbols-outlined">history</span>
           <span>Activity Log</span>
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#cebdff] bg-[#31353f]/40 rounded-lg shadow-[0_0_15px_rgba(124,58,237,0.1)] active:scale-95 duration-150"
-          href="#"
+          href="contribution.html"
         >
           <span class="material-symbols-outlined">stars</span>
           <span>Contribution</span>
@@ -627,6 +627,22 @@
       const app = initializeApp(firebaseConfig);
       export const db = getFirestore(app);
       // export const db = getFirestore(app, "default");
+
+      import { listenAuth } from "../js/auth.js";
+
+      listenAuth((data) => {
+        if (!data) {
+          // belum login → tendang
+          window.location.href = "/pages/auth/login.html";
+          return;
+        }
+
+        // 🔥 ini yang bikin data “terasa kebawa”
+        window.currentUser = data.user;
+        window.currentUserData = data.userData;
+
+        console.log("User aktif:", data.userData.nama);
+      });
     </script>
   </body>
 </html>

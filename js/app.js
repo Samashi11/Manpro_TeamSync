@@ -10,6 +10,21 @@ import {
   where,
   Timestamp,
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+import { listenAuth } from "./auth.js";
+
+listenAuth((data) => {
+  if (!data) {
+    // belum login → tendang
+    window.location.href = "/login.html";
+    return;
+  }
+
+  console.log("User:", data.userData);
+
+  // simpan global
+  window.currentUser = data.user;
+  window.currentUserData = data.userData;
+});
 
 // format action biar manusiawi
 function formatAction(action) {
@@ -20,13 +35,8 @@ function formatAction(action) {
 }
 
 async function getUserName(userRef) {
-  try {
-    const snap = await getDoc(userRef);
-    return snap.exists() ? snap.data().nama : "Unknown User";
-  } catch (err) {
-    console.error("User error:", err);
-    return "Error User";
-  }
+  const snap = await getDoc(userRef);
+  return snap.exists() ? snap.data().nama : "Unknown";
 }
 
 async function getTaskTitle(taskRef) {
@@ -52,11 +62,11 @@ async function loadLogs() {
   for (const docSnap of snapshot.docs) {
     const data = docSnap.data();
 
-    const userName = await getUserName(data.user_id);
-    const taskTitle = await getTaskTitle(data.task_id);
+    const userName = data.userName || "Unknown User";
+    const taskTitle = data.taskTitle || "Unknown Task";
 
-    const time = data["timestamp "]
-      ? data["timestamp "].toDate().toLocaleTimeString()
+    const time = data.timestamp
+      ? data.timestamp.toDate().toLocaleTimeString()
       : "no time";
     console.log(data);
     container.innerHTML += `
@@ -91,16 +101,21 @@ loadLogs();
 
 async function createTask(title, userId) {
   try {
-    const taskRef = await addDoc(collection(db, "tasks"), {
+    const userRef = doc(db, "users", userId);
+
+    await addDoc(collection(db, "tasks"), {
       title,
       status: "todo",
-      assignedTo: userId,
-      deadline: new Date(),
+      assignedTo: userRef,
+      assignedToName: userName,
+      deadline: Timestamp.fromDate(new Date()),
     });
 
     await addDoc(collection(db, "activity_logs"), {
-      userId,
-      taskId: taskRef.id,
+      userId: userRef,
+      userName: userName,
+      taskId: taskRef,
+      taskTitle: title,
       action: "create_task",
       timestamp: Timestamp.now(),
     });
@@ -124,8 +139,10 @@ async function updateTask(taskId, userId, newStatus) {
   }
 
   await addDoc(collection(db, "activity_logs"), {
-    userId,
-    taskId,
+    userId: userRef,
+    userName: userName,
+    taskId: taskRef,
+    taskTitle: title,
     action: actionType,
     timestamp: Timestamp.now(),
   });

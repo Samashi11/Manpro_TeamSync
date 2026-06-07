@@ -132,7 +132,7 @@
       >
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="dashboard.html"
         >
           <span class="material-symbols-outlined" data-icon="dashboard"
             >dashboard</span
@@ -141,7 +141,7 @@
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="projects.html"
         >
           <span class="material-symbols-outlined" data-icon="folder_shared"
             >folder_shared</span
@@ -150,7 +150,7 @@
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="tasks.html"
         >
           <span class="material-symbols-outlined" data-icon="assignment"
             >assignment</span
@@ -160,7 +160,7 @@
         <!-- Active State: Activity Log -->
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#cebdff] bg-[#31353f]/40 rounded-lg shadow-[0_0_15px_rgba(124,58,237,0.1)] active:scale-95 duration-150"
-          href="#"
+          href="logs.html"
         >
           <span
             class="material-symbols-outlined"
@@ -172,7 +172,7 @@
         </a>
         <a
           class="flex items-center gap-3 px-4 py-3 text-[#ccc3d8] hover:text-[#dfe2ef] hover:bg-[#31353f]/20 transition-all duration-300"
-          href="#"
+          href="contribution.html"
         >
           <span class="material-symbols-outlined" data-icon="stars">stars</span>
           <span>Contribution</span>
@@ -467,6 +467,44 @@
     </main>
     <!-- Contextual FAB (Suppressed for Activity Log as per Shell Visibility Rule) -->
     <!-- Not rendering FAB for this screen -->
-    <script type="module" src="app.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAn1kK9yI3xdvS3_aOpCW1KDtQW2e7UBJU",
+        authDomain: "teamsync-5e4c2.firebaseapp.com",
+        projectId: "teamsync-5e4c2",
+        storageBucket: "teamsync-5e4c2.firebasestorage.app",
+        messagingSenderId: "242657589018",
+        appId: "1:242657589018:web:850c959416531a4db35ea3",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      export const db = getFirestore(app);
+      // export const db = getFirestore(app, "default");
+
+      import { listenAuth } from "../js/auth.js";
+
+      listenAuth((data) => {
+        if (!data) {
+          // belum login → tendang
+          window.location.href = "/pages/auth/login.html";
+          return;
+        }
+
+        // 🔥 ini yang bikin data “terasa kebawa”
+        window.currentUser = data.user;
+        window.currentUserData = data.userData;
+
+        console.log("User aktif:", data.userData.nama);
+      });
+    </script>
+    <script type="module" src="../js/app.js"></script>
   </body>
 </html>
